@@ -54,9 +54,9 @@ public class TodoController {
         todoRepository.deleteById(id);
     }
 
-    @GetMapping("/todos/{id}")
-    public void findTodoById(@PathVariable("id") Long id) {
-        todoRepository.findById(id);
+    @PutMapping("/todos/{id}")
+    public void editTodo(@RequestParam("todo-title") String title, @PathVariable Long id) {
+        todoRepository.findById(id).ifPresent(toDo -> toDo.setTitle(title));
     }
 
     @PutMapping("/todos/{id}/toggle_status")
